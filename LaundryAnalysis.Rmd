@@ -1,0 +1,65 @@
+---
+title: "Laundry Analysis"
+author: "Gabe Cederberg"
+date: "2/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(janitor)
+library(tidyverse)
+library(lubridate)
+library(readxl)
+```
+
+
+```{r}
+a <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "10 DEWOLFE STREET") %>% 
+          mutate(location = "10 DEWOLFE STREET") %>% 
+          clean_names()
+
+b <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "1201 MASS AVE 3RD FLR LR") %>% 
+          mutate(location = "1201 MASS AVE 3RD FLR LR") %>% 
+          clean_names()
+
+c <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "1202 MASS AVE 4TH FLR LR") %>% 
+          mutate(location = "1202 MASS AVE 4TH FLR LR") %>% 
+          clean_names()
+
+d <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "1306 MASS AVE") %>% 
+          mutate(location = "1306 MASS AVE") %>% 
+          clean_names()
+
+e <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "20 DEWOLFE STREET") %>% 
+          mutate(location = "20 DEWOLFE STREET") %>% 
+          clean_names()
+
+f <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "20 PRESCOTT ST") %>% 
+          mutate(location = "20 PRESCOTT ST") %>% 
+          clean_names()
+
+g <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "22 PRESCOTT ST") %>% 
+          mutate(location = "22 PRESCOTT ST") %>% 
+          clean_names()
+
+
+h <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "24 PRESCOTT ST") %>% 
+          mutate(location = "24 PRESCOTT ST")%>% 
+          clean_names()
+h
+```
+
+
+```{r}
+#bind_rows(a, b, c, by = "timestamp", "day_of_week", "location")
+
+```
