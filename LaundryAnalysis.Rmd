@@ -55,11 +55,256 @@ h <- read_excel("Copy of LaundryView Data.xlsx",
         sheet = "24 PRESCOTT ST") %>% 
           mutate(location = "24 PRESCOTT ST")%>% 
           clean_names()
-h
+
+i <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "65 MOUNT AUBURN STREET") %>% 
+          mutate(location = "65 MOUNT AUBURN STREET")%>% 
+          clean_names()
+
+j <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "8 PLYMPTON STREET") %>% 
+          mutate(location = "8 PLYMPTON STREET") %>% 
+          clean_names()
+
+
+k <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CABOT HOUSE - BERTRAM HALL") %>% 
+          mutate(location = "CABOT HOUSE - BERTRAM HALL")%>% 
+          clean_names()
+
+l <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CABOT HOUSE - BRIGGS HALL") %>% 
+          mutate(location = "CABOT HOUSE - BRIGGS HALL")%>% 
+          clean_names()
+
+m <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CABOT HOUSE - ELLIOT HALL") %>% 
+          mutate(location = "CABOT HOUSE - ELLIOT HALL") %>% 
+          clean_names()
+
+n <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CABOT HOUSE - WHITMAN HALL") %>% 
+          mutate(location = "CABOT HOUSE - WHITMAN HALL")%>% 
+          clean_names()
+
+o <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CURRIER HOUSE - BINGHAM HALL") %>% 
+          mutate(location = "CURRIER HOUSE - BINGHAM HALL")%>% 
+          clean_names()
+
+p <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CURRIER HOUSE - DANIELS HALL") %>% 
+          mutate(location = "CURRIER HOUSE - DANIELS HALL") %>% 
+          clean_names()
+
+
+q <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CURRIER HOUSE - GILBERT HALL") %>% 
+          mutate(location = "CURRIER HOUSE - GILBERT HALL")%>% 
+          clean_names()
+
+r <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CURRIER HOUSE - TUCHMAN HALL") %>% 
+          mutate(location = "CURRIER HOUSE - TUCHMAN HALL")%>% 
+          clean_names()
+
+
+s <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - COMSTOCK HA") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - COMSTOCK HA") %>% 
+          clean_names()
+
+
+t <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - HOLMES HALL") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - HOLMES HALL")%>% 
+          clean_names()
+
+u <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - JORDAN NORT") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - JORDAN NORT")%>% 
+          clean_names()
+
+
+
+v <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - JORDAN SOUT") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - JORDAN SOUT") %>% 
+          clean_names()
+
+
+w <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - MOORS HALL") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - MOORS HALL")%>% 
+          clean_names()
+
+x <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "PFORZHEIMER HOUSE - WOLBACH HAL") %>% 
+          mutate(location = "PFORZHEIMER HOUSE - WOLBACH HAL")%>% 
+          clean_names()
+
+y <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "ADAMS HOUSE") %>% 
+          mutate(location = "ADAMS HOUSE") %>% 
+          clean_names()
+
+
+z <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CLAVERLY HALL") %>% 
+          mutate(location = "CLAVERLY HALL")%>% 
+          clean_names()
+
+aa <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LOWELL HOUSE D") %>% 
+          mutate(location = "LOWELL HOUSE D")%>% 
+          clean_names()
+
+
+bb <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LOWELL HOUSE G") %>% 
+          mutate(location = "LOWELL HOUSE G") %>% 
+          clean_names()
+
+cc <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LOWELL HOUSE N") %>% 
+          mutate(location = "LOWELL HOUSE N")%>% 
+          clean_names()
+
+dd <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "NEW QUINCY-6TH FLOOR") %>% 
+          mutate(location = "NEW QUINCY-6TH FLOOR")%>% 
+          clean_names()
+
+ee <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "NEW QUINCY-BASEMENT STUDENT LAU") %>% 
+          mutate(location = "NEW QUINCY-BASEMENT STUDENT LAU") %>% 
+          clean_names()
+
+ff <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "STONE HALL") %>% 
+          mutate(location = "STONE HALL")%>% 
+          clean_names()
+
+gg <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "DUNSTER HOUSE") %>% 
+          mutate(location = "DUNSTER HOUSE")%>% 
+          clean_names()
+
+hh <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LEVERETT HOUSE F TOWER") %>% 
+          mutate(location = "LEVERETT HOUSE F TOWER")%>% 
+          clean_names()
+
+ii <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LEVERETT HOUSE G TOWER") %>% 
+          mutate(location = "LEVERETT HOUSE G TOWER")%>% 
+          clean_names()
+
+jj <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "LEVERETT HOUSE MCKINLOCK") %>% 
+          mutate(location = "LEVERETT HOUSE MCKINLOCK")%>% 
+          clean_names()
+
+kk <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "MATHER HOUSE HIGH-RISE") %>% 
+          mutate(location = "MATHER HOUSE HIGH-RISE")%>% 
+          clean_names()
+
+ll <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "MATHER HOUSE LOW-RISE") %>% 
+          mutate(location = "MATHER HOUSE LOW-RISE")%>% 
+          clean_names()
+
+mm <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "ELIOT HOUSE J") %>% 
+          mutate(location = "ELIOT HOUSE J")%>% 
+          clean_names()
+
+nn <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "KIRKLAND HOUSE G") %>% 
+          mutate(location = "KIRKLAND HOUSE G")%>% 
+          clean_names()
+
+oo <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "KIRKLAND HOUSE J") %>% 
+          mutate(location = "KIRKLAND HOUSE J")%>% 
+          clean_names()
+
+pp <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "WINTHROP - GORE") %>% 
+          mutate(location = "WINTHROP - GORE")%>% 
+          clean_names()
+
+qq <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "WINTHROP - STANDISH") %>% 
+          mutate(location = "WINTHROP - STANDISH")%>% 
+          clean_names()
+
+rr <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "APLEY COURT") %>% 
+          mutate(location = "APLEY COURT")%>% 
+          clean_names()
+
+ss <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "CANADAY HALL") %>% 
+          mutate(location = "CANADAY HALL")%>% 
+          clean_names()
+
+tt <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "GREENOUGH HALL") %>% 
+          mutate(location = "GREENOUGH HALL")%>% 
+          clean_names()
+
+uu <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "HURLBUT HALL") %>% 
+          mutate(location = "HURLBUT HALL")%>% 
+          clean_names()
+
+vv <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "MATTHEWS HALL") %>% 
+          mutate(location = "MATTHEWS HALL")%>% 
+          clean_names()
+
+ww <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "STOUGHTON HALL") %>% 
+          mutate(location = "STOUGHTON HALL")%>% 
+          clean_names()
+
+xx <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "THAYER HALL") %>% 
+          mutate(location = "THAYER HALL")%>% 
+          clean_names()
+
+yy <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "WELD HALL") %>% 
+          mutate(location = "WELD HALL")%>% 
+          clean_names()
+
+zz <- read_excel("Copy of LaundryView Data.xlsx", 
+        sheet = "WIGGLESWORTH HALL") %>% 
+          mutate(location = "WIGGLESWORTH HALL")%>% 
+          clean_names()
+
+
+full_data <- bind_rows(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,
+        aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv, ww, xx, yy, zz)
+full_data
+
+test <- full_data %>% 
+                filter(location == "STONE HALL") %>% 
+        group_by(time_of_day) %>% 
+        mutate(avg_unav = mean(unavailable_washers))
+
+test
+
+ggplot(test, aes(x = time_of_day, y = avg_unav)) + geom_col(position = "dodge")
+
+busiest <- full_data %>% 
+        group_by(location) %>% 
+        summarize(mean_busy = mean(unavailable_washers)) %>% 
+        arrange(desc(mean_busy))
+busiest
+
 ```
 
 
-```{r}
-#bind_rows(a, b, c, by = "timestamp", "day_of_week", "location")
-
-```
