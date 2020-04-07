@@ -14,7 +14,10 @@ library(readxl)
 ```
 
 
-```{r}
+```{r, echo = FALSE}
+
+# Merging the sheets into one dataframe
+
 a <- read_excel("Copy of LaundryView Data.xlsx", 
         sheet = "10 DEWOLFE STREET") %>% 
           mutate(location = "10 DEWOLFE STREET") %>% 
@@ -288,22 +291,48 @@ zz <- read_excel("Copy of LaundryView Data.xlsx",
 
 full_data <- bind_rows(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,
         aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv, ww, xx, yy, zz)
-full_data
 
 test <- full_data %>% 
-                filter(location == "STONE HALL") %>% 
         group_by(time_of_day) %>% 
         mutate(avg_unav = mean(unavailable_washers))
+```
 
-test
 
-ggplot(test, aes(x = time_of_day, y = avg_unav)) + geom_col(position = "dodge")
+```{r, echo = FALSE}
+# Running a couple different analyses       
+        
+# ggplot(test, aes(time_of_day, avg_unav)) + geom_point()
+```
 
-busiest <- full_data %>% 
-        group_by(location) %>% 
-        summarize(mean_busy = mean(unavailable_washers)) %>% 
-        arrange(desc(mean_busy))
-busiest
+
+```{r, echo = FALSE}
+ ggplot(test, aes(x = time_of_day, y = avg_unav)) + geom_col(position = "dodge")
+```
+
+
+```{r, echo = FALSE}
+# busiest <- full_data %>% 
+#         group_by(location) %>% 
+#         summarize(mean_busy = mean(unavailable_washers)) %>% 
+#         arrange(desc(mean_busy))
+# 
+# actual_busiest <- full_data %>% 
+#         group_by(location) %>% 
+#         summarize(washers = max(available_washers),
+#                   avg_busy = mean(unavailable_washers),
+#                   adjusted = (avg_busy / washers)) %>% 
+#         arrange(desc(adjusted)) %>% 
+#         head(10)
+# 
+# ggplot(actual_busiest, aes(time_of_day, avg_unav)) + geom_point()
+# 
+# 
+# prescott22 <- full_data %>% 
+#         filter(location == "22 PRESCOTT ST") %>% 
+#         group_by(time_of_day) %>% 
+#         summarize(mean_busy = mean(unavailable_washers))
+
+# ggplot(prescott22, aes(time_of_day, mean_busy)) + geom_point()
 
 ```
 
