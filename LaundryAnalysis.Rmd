@@ -311,29 +311,52 @@ test <- full_data %>%
 
 
 ```{r, echo = FALSE}
-# busiest <- full_data %>% 
-#         group_by(location) %>% 
-#         summarize(mean_busy = mean(unavailable_washers)) %>% 
-#         arrange(desc(mean_busy))
-# 
-# actual_busiest <- full_data %>% 
-#         group_by(location) %>% 
-#         summarize(washers = max(available_washers),
-#                   avg_busy = mean(unavailable_washers),
-#                   adjusted = (avg_busy / washers)) %>% 
-#         arrange(desc(adjusted)) %>% 
-#         head(10)
-# 
-# ggplot(actual_busiest, aes(time_of_day, avg_unav)) + geom_point()
-# 
-# 
-# prescott22 <- full_data %>% 
-#         filter(location == "22 PRESCOTT ST") %>% 
-#         group_by(time_of_day) %>% 
-#         summarize(mean_busy = mean(unavailable_washers))
+busiest <- full_data %>%
+         group_by(location) %>%
+         summarize(mean_busy = mean(unavailable_washers)) %>%
+         arrange(desc(mean_busy))
 
-# ggplot(prescott22, aes(time_of_day, mean_busy)) + geom_point()
+actual_busiest <- full_data %>%
+         group_by(location) %>%
+         summarize(washers = max(available_washers),
+                   avg_busy = mean(unavailable_washers),
+                   adjusted = (avg_busy / washers)) %>%
+         arrange(desc(adjusted)) %>%
+         head(10)
 
+actual_busiest
+ 
+ggplot(actual_busiest, aes(time_of_day, avg_unav)) + geom_point()
+
+
+busiest <- full_data %>%
+         filter(location == "22 PRESCOTT ST" |
+                location == "20 PRESCOTT ST" |
+                location == "ADAMS HOUSE" |
+                location == "NEW QUINCY-6TH FLOOR" |
+                location == "PFORZHEIMER HOUSE - MOORS HALL" |
+                location == "STONE HALL") %>%
+         group_by(time_of_day, location) %>%
+         summarize(mean_busy = mean(unavailable_washers))
+
+ 
+ggplot(busiest, aes(time_of_day, mean_busy, color = location)) + 
+          geom_line()
+
+
+prescott22 <- full_data %>%
+         filter(location == "22 PRESCOTT ST")
+prescott22
+
+xy <- full_data %>% 
+        group_by(time_of_day, location) %>%
+         summarize(mean_busy = mean(unavailable_washers))
+        
+
+
+ggplot(xy, aes(time_of_day, mean_busy)) +
+        facet_wrap(~ location) +
+        geom_line()
 ```
 
 
