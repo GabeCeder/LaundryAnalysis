@@ -15,7 +15,6 @@ library(readxl)
 
 
 ```{r, echo = FALSE}
-
 # Merging the sheets into one dataframe
 
 a <- read_excel("Copy of LaundryView Data.xlsx", 
@@ -290,8 +289,27 @@ zz <- read_excel("Copy of LaundryView Data.xlsx",
 
 
 full_data <- bind_rows(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z,
-        aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv, ww, xx, yy, zz)
+        aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll, mm, nn, oo, pp, qq, rr, ss, tt, uu, vv, ww, xx, yy, zz) %>% 
+        select(timestamp = "timestamp",
+               day = "day_of_week",
+               time = "time_of_day",
+               location,
+               avail_wash = "available_washers",
+               unavail_wash = "unavailable_washers",
+               avail_dryers = "available_dryers",
+               unavail_dryers = "unavailable_dryers")
 
+full_data %>% 
+        mutate(no_washers = ifelse(avail_wash == 0, 1, 0)) %>% 
+        group_by(location, time) %>%
+        summarize(pct_no_wash = mean(no_washers)) %>% 
+        mutate(pct_wash_available = 1 - pct_no_wash) %>% 
+        arrange(pct_wash_available)
+
+```
+
+
+```{r, echo = FALSE}
 test <- full_data %>% 
         group_by(time_of_day) %>% 
         mutate(avg_unav = mean(unavailable_washers))
@@ -354,9 +372,19 @@ xy <- full_data %>%
         
 
 
+
+
+
 ggplot(xy, aes(time_of_day, mean_busy)) +
         facet_wrap(~ location) +
         geom_line()
+
+full_data
+
+
+full_data %>% 
+        
+
 ```
 
 
