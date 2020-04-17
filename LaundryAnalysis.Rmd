@@ -303,8 +303,9 @@ full_data %>%
         mutate(no_washers = ifelse(avail_wash == 0, 1, 0)) %>% 
         group_by(location, time) %>%
         summarize(pct_no_wash = mean(no_washers)) %>% 
-        mutate(pct_wash_available = 1 - pct_no_wash) %>% 
-        arrange(pct_wash_available)
+        mutate(pct_wash_available = 1 - pct_no_wash)
+
+
 
 ```
 
@@ -386,5 +387,9 @@ full_data %>%
         
 
 ```
+```{r}
+
+```
+
 
 
