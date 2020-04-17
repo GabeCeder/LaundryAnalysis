@@ -299,6 +299,8 @@ full_data <- bind_rows(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, 
                avail_dryers = "available_dryers",
                unavail_dryers = "unavailable_dryers")
 
+save(full_data, file ="data/full_data.Rdata")
+
 full_data %>% 
         mutate(no_washers = ifelse(avail_wash == 0, 1, 0)) %>% 
         group_by(location, time) %>%
