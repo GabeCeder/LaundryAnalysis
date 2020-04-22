@@ -23,7 +23,7 @@ a <- read_excel("Copy of LaundryView Data.xlsx",
           clean_names()
 
 b <- read_excel("Copy of LaundryView Data.xlsx", 
-        sheet = "1201 MASS AVE 3RD FLR LR") %>% 
+        sheet = "1201 MASS AVE3RD FLR LR") %>% 
           mutate(location = "1201 MASS AVE 3RD FLR LR") %>% 
           clean_names()
 

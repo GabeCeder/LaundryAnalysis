@@ -1,5 +1,5 @@
 ---
-title: "google_graphs"
+title: "Google Graphs"
 author: "Amy Zhou"
 date: "4/16/2020"
 output: html_document
@@ -7,9 +7,51 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
 ```
 
 ```{r}
+load('data/full_data.Rdata')
+```
+```{r}
+ laundry <- full_data %>% 
+  mutate(month = month(timestamp),
+         total_avail_wash = avail_wash + unavail_wash,
+         total_avail_dryers = avail_dryers + unavail_dryers,
+         percent_used_wash = (unavail_wash/total_avail_wash) * 100)
+
+
+save(laundry, file = "LaundryAnalysis/data/laundry.Rdata")
+```
+```{r}
+plot_data <- laundry %>% 
+  filter(location == "10 DEWOLFE STREET" &
+           day == 4 &
+           month == 4) %>%
+  group_by(time) %>% 
+  summarise(avg_busy = mean(percent_used_wash, na.rm = TRUE))
+  
+```
+```{r}
+ggplot(plot_data, aes(x = time, y = avg_busy)) +
+  geom_col(fill = "dodgerblue1") +
+  theme_classic() +
+  scale_fill_manual() %>% 
+  labs(
+    title = "Dewolfe",
+    subtitle = "Thursdays in May"
+  ) +
+  ylab(
+    "Percent of Machines Used"
+  ) +
+  xlab(
+    "Hour"
+  )
 
 ```
+
+
 
