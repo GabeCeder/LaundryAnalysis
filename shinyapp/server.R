@@ -24,7 +24,26 @@ function(input, output) {
     
   })
   
-  # reactive function to determine value for adjusting y-axis scale
+  # reactive function to determine min value for y-axis scale
+  r1 <- reactive({
+    
+    d <- switch(input$day,
+                "Sunday" = 0,
+                "Monday" = 1,
+                "Tuesday" = 2,
+                "Wednesday" = 3,
+                "Thursday" = 4,
+                "Friday" = 5,
+                "Saturday" = 6)
+    
+    dist <- subset(full, day == d & location == input$location)
+    
+    # return min avg_avail times 0.8
+    min(dist[,3]) * 0.8
+    
+  })
+  
+  # reactive function to determine max value for y-axis scale
   r2 <- reactive({
     
     d <- switch(input$day,
@@ -38,8 +57,8 @@ function(input, output) {
     
     dist <- subset(full, day == d & location == input$location)
     
-    # return max avg_avail times 1.5
-    max(dist[,3]) * 1.5
+    # return max avg_avail times 1.2
+    max(dist[,3]) * 1.2
     
   })
   
@@ -108,7 +127,8 @@ function(input, output) {
     p <- ggplot(dist, aes(x = time, y = avg_avail, fill = avg_avail)) +
       geom_col(position = "dodge") +
       labs(x = "Hour", y = "Average Number of Available Washers") +
-      ylim(NA, r2())
+      # ylim(NA, r2()) +
+      coord_cartesian(ylim = c(r1(), r2()))
     
     # produce plot
     ggplotly(p, height = 700)
