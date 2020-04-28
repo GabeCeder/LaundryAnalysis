@@ -6,6 +6,7 @@ library(tidyr)
 
 # load in data
 load(file = "full.Rdata")
+load(file = "full1.Rdata")
 load(file = "full_data.Rdata")
 
 # location dropdown in UI

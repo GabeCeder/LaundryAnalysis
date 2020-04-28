@@ -1,14 +1,14 @@
 
 navbarPage("Laundry Analysis",
 
-  tabPanel("Machines Available",
+  tabPanel("Number of Washers Available",
            
     # use fluid Bootstrap layout
     fluidPage(    
       
       # give page title
       titlePanel(
-        h1("Laundry: Washers Available"),
+        h1("Number of Washers Available"),
         windowTitle = "LaundryView Data"
       ),
       
@@ -34,12 +34,46 @@ navbarPage("Laundry Analysis",
       
     ) # end fluidPage
   ),
+  
+  tabPanel("Number of Dryers Available",
+           
+           # use fluid Bootstrap layout
+           fluidPage(    
+             
+             # give page title
+             titlePanel(
+               h1("Number of Dryers Available"),
+               windowTitle = "LaundryView Data"
+             ),
+             
+             # produce sidebar
+             sidebarLayout(      
+               
+               sidebarPanel(
+                 selectInput("day", "Day of Week:", c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
+                 selectInput("location", "Location:", vars),
+                 hr(),
+                 helpText("LaundryView Data, March-April 2018")
+               ),
+               
+               # main panel for plot
+               mainPanel(
+                 
+                 # produce tabs and output
+                 tabsetPanel(type = "tabs",
+                             tabPanel("Plot", plotlyOutput("plot1")),
+                             tabPanel("Summary", verbatimTextOutput("summary1")))
+               ) # end tabsetPanel
+             ) # end mainPanel
+             
+           ) # end fluidPage
+  ),
 
   tabPanel("Probability of Machines Available",
            fluidPage(
              
              titlePanel(
-               h1("Laundry: Probability of Machines Available"),
+               h1("Probability of Machines Available"),
                windowTitle = "LaundryView Data"
              ),
              
