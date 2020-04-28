@@ -1,0 +1,12 @@
+name: shinyapp
+title: shinyapp
+username:
+account: alison-hu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2202601
+bundleId: 3077468
+url: https://alison-hu.shinyapps.io/shinyapp/
+when: 1588090120.98729
+asMultiple: FALSE
+asStatic: FALSE
