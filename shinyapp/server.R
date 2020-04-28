@@ -1,8 +1,6 @@
 
 function(input, output) {
   
-  library(ggplot2)
-  
   # reactive function to produce summary stats
   r <- reactive({
     
@@ -84,31 +82,20 @@ function(input, output) {
       ungroup() %>% 
       select(at_least_1_w)
     
- 
     bound_data <- cbind(dat, e) 
     
-    plot <- bound_data %>% 
+    bound_data <- bound_data %>% 
       mutate(proportion_w = at_least_1_w/total) %>% 
-      mutate(w = case_when(
-        proportion_w == 1 ~ 0.99,
-        TRUE ~ proportion_w
-      )) %>% 
-      ggplot(aes(x = time, y = w, fill = w)) +
-      geom_col() %>% 
-      labs(
-        title = "Likelihood of At Least 1 Washing Machine Being Open"
-      ) +
-      ylab(
-        "Likelihood"
-      ) +
-      xlab(
-        "Time"
-      )
+      mutate(w = case_when(proportion_w == 1 ~ 0.99, TRUE ~ proportion_w))
+      
+    q <- ggplot(bound_data, aes(x = time, y = w, fill = w)) +
+      geom_col() + 
+      labs(title = "Likelihood of At Least 1 Washing Machine Being Open", y = "Likelihood", x = "Time")
     
-    return(plot)
-  
+    ggplotly(q, height = 700)
+    
   })
-
+  
   # produce plot
   output$plot <- renderPlotly({
     
@@ -127,21 +114,20 @@ function(input, output) {
     p <- ggplot(dist, aes(x = time, y = avg_avail, fill = avg_avail)) +
       geom_col(position = "dodge") +
       labs(x = "Hour", y = "Average Number of Available Washers") +
-      # ylim(NA, r2()) +
       coord_cartesian(ylim = c(r1(), r2()))
     
     # produce plot
     ggplotly(p, height = 700)
+    
+  })
   
+  output$washers <- renderPlotly({
+    r3()
   })
   
   # produce summary
   output$summary <- renderPrint({
     summary(r())
-  })
-  
-  output$washers <- renderPlot({
-    r3()
   })
   
 }
