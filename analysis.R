@@ -1,52 +1,41 @@
 library(tidyr)
+library(dplyr)
 library(ggplot2)
 
 load('data/full_data.Rdata')
 
 
-d <- subset(full_data, day == 4 & location == "10 DEWOLFE STREET") %>% 
+day <- 2
+location <- "20 PRESCOTT ST"
+
+d <- subset(full_data, day == day & location == location) %>% 
+  group_by(time) %>% 
   summarise(total = n())
 
-e <- subset(full_data, day == 4 & location == "10 DEWOLFE STREET") %>% 
-  mutate(at_least_one_w = ifelse(avail_wash >= 1, 1, 0),
-         at_least_one_d = ifelse(avail_wash >= 1, 1, 0)) %>% 
-  group_by(time, at_least_one_w) %>% 
-  summarise(at_least_1_w = n()) %>% 
-  filter(at_least_one_w == 1) %>% 
-  ungroup() %>% 
-  select(at_least_1_w)
-
-f <- subset(full_data, day == 4 & location == "10 DEWOLFE STREET") %>% 
-  mutate(at_least_one_w = ifelse(avail_wash >= 1, 1, 0),
-         at_least_one_d = ifelse(avail_wash >= 1, 1, 0)) %>% 
-  group_by(time, at_least_one_d) %>% 
-  summarise(at_least_1_d = n()) %>% 
-  filter(at_least_one_d == 1) %>% 
-  ungroup() %>% 
-  select(at_least_1_d)
-
-
-bound_data <-  cbind(d, e, f) 
+e <- subset(full_data, day == day & location == location) %>% 
+  filter(avail_wash >= 1) %>% 
+  group_by(time) %>% 
+  summarise(prop = n())
+  
+bound_data <-  inner_join(d,e)
 
 bound_data %>% 
-  mutate(proportion_w = at_least_1_w/total,
-         proportion_d = at_least_1_d/total) %>% 
+  mutate(proportion_w = prop/total) %>% 
   mutate(w = case_when(
     proportion_w == 1 ~ 0.99,
     TRUE ~ proportion_w
-  ),
-  d = case_when(
-    proportion_d == 1 ~ 0.99,
-    TRUE ~ proportion_d
   )) %>% 
   ggplot(aes(x = time, y = w, fill = w)) +
-  geom_col() %>% 
+  geom_col() +
   labs(
-    title = "Likelihood of At Least 1 Washing Machine Being Open"
+    title = "Likelihood of Having 1 Machine Open"
   ) +
   ylab(
     "Likelihood"
   ) +
   xlab(
     "Time"
+  ) +
+  theme(
+    legend.position = "none"
   )

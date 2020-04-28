@@ -2,6 +2,7 @@ library(shiny)
 library(ggplot2)
 library(dplyr)
 library(plotly)
+library(tidyr)
 
 # load in data
 load(file = "full.Rdata")

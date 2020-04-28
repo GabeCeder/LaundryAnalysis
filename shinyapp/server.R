@@ -70,27 +70,73 @@ function(input, output) {
                 "Friday" = 5,
                 "Saturday" = 6)
     
+    num <- as.character(input$numMachines)
+    
+    t <- paste("Likelihood of at Least",num, "Machine(s) Open" )
+    
     dat <- subset(full_data, day == d & location == input$location1) %>% 
       group_by(time) %>% 
       summarise(total = n())
     
     e <- subset(full_data, day == d & location == input$location1) %>% 
-      mutate(at_least_one_w = ifelse(avail_wash >= input$numMachines, 1, 0)) %>% 
-      group_by(time, at_least_one_w) %>% 
-      summarise(at_least_1_w = n()) %>% 
-      filter(at_least_one_w == 1) %>% 
-      ungroup() %>% 
-      select(at_least_1_w)
+      filter(avail_wash >= input$numMachines) %>% 
+      group_by(time) %>% 
+      summarise(prop = n())
     
-    bound_data <- cbind(dat, e) 
-    
-    bound_data <- bound_data %>% 
-      mutate(proportion_w = at_least_1_w/total) %>% 
-      mutate(w = case_when(proportion_w == 1 ~ 0.99, TRUE ~ proportion_w))
+    bound_data <- inner_join(dat,e) %>% 
+       mutate(proportion_w = prop/total) %>% 
+       mutate(w = case_when(
+         proportion_w == 1 ~ 0.99,
+         TRUE ~ proportion_w
+       ))
       
-    q <- ggplot(bound_data, aes(x = time, y = w, fill = w)) +
+     q <- ggplot(bound_data, aes(x = time, y = w, fill = w)) +
+       geom_col() + 
+       labs(title = t, y = "Likelihood", x = "Time") +
+       theme(
+         legend.position = "none"
+       )
+     
+     ggplotly(q, height = 700)
+
+  })
+  
+  r4 <- reactive({
+    d <- switch(input$day1,
+                "Sunday" = 0,
+                "Monday" = 1,
+                "Tuesday" = 2,
+                "Wednesday" = 3,
+                "Thursday" = 4,
+                "Friday" = 5,
+                "Saturday" = 6)
+    
+    num <- as.character(input$numMachines)
+    
+    t <- paste("Likelihood of at Least",num, "Machine(s) Open" )
+    
+    dat <- subset(full_data, day == d & location == input$location1) %>% 
+      group_by(time) %>% 
+      summarise(total = n())
+    
+    e <- subset(full_data, day == d & location == input$location1) %>% 
+      filter(avail_dryers >= input$numMachines) %>% 
+      group_by(time) %>% 
+      summarise(prop = n())
+    
+    bound_data <- inner_join(dat,e) %>% 
+      mutate(proportion_d = prop/total) %>% 
+      mutate(dr = case_when(
+        proportion_d == 1 ~ 0.99,
+        TRUE ~ proportion_d
+      ))
+    
+    q <- ggplot(bound_data, aes(x = time, y = dr, fill = dr)) +
       geom_col() + 
-      labs(title = "Likelihood of At Least 1 Washing Machine Being Open", y = "Likelihood", x = "Time")
+      labs(title = t, y = "Likelihood", x = "Time") +
+      theme(
+        legend.position = "none"
+      )
     
     ggplotly(q, height = 700)
     
@@ -123,6 +169,10 @@ function(input, output) {
   
   output$washers <- renderPlotly({
     r3()
+  })
+  
+  output$dryers <- renderPlotly({
+    r4()
   })
   
   # produce summary

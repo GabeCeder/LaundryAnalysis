@@ -56,7 +56,7 @@ navbarPage("Laundry Analysis",
                mainPanel(
                   tabsetPanel(type = "tabs",
                              tabPanel("Washing Machines", plotlyOutput("washers")),
-                             tabPanel("Drying Machines", plotlyOutput("dryers"))
+                             tabPanel("Dryer Machines", plotlyOutput("dryers"))
                              ) # end tabsetPanel
                ) # end mainPanel
              ) # end sidebarLayout
