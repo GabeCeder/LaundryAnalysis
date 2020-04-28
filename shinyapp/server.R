@@ -1,6 +1,8 @@
 
 function(input, output) {
   
+  library(ggplot2)
+  
   # reactive function to produce summary stats
   r <- reactive({
     
@@ -40,6 +42,53 @@ function(input, output) {
     max(dist[,3]) * 1.5
     
   })
+  
+  r3 <- reactive({
+    d <- switch(input$day1,
+                "Sunday" = 0,
+                "Monday" = 1,
+                "Tuesday" = 2,
+                "Wednesday" = 3,
+                "Thursday" = 4,
+                "Friday" = 5,
+                "Saturday" = 6)
+    
+    dat <- subset(full_data, day == d & location == input$location1) %>% 
+      group_by(time) %>% 
+      summarise(total = n())
+    
+    e <- subset(full_data, day == d & location == input$location1) %>% 
+      mutate(at_least_one_w = ifelse(avail_wash >= input$numMachines, 1, 0)) %>% 
+      group_by(time, at_least_one_w) %>% 
+      summarise(at_least_1_w = n()) %>% 
+      filter(at_least_one_w == 1) %>% 
+      ungroup() %>% 
+      select(at_least_1_w)
+    
+ 
+    bound_data <- cbind(dat, e) 
+    
+    plot <- bound_data %>% 
+      mutate(proportion_w = at_least_1_w/total) %>% 
+      mutate(w = case_when(
+        proportion_w == 1 ~ 0.99,
+        TRUE ~ proportion_w
+      )) %>% 
+      ggplot(aes(x = time, y = w, fill = w)) +
+      geom_col() %>% 
+      labs(
+        title = "Likelihood of At Least 1 Washing Machine Being Open"
+      ) +
+      ylab(
+        "Likelihood"
+      ) +
+      xlab(
+        "Time"
+      )
+    
+    return(plot)
+  
+  })
 
   # produce plot
   output$plot <- renderPlotly({
@@ -69,6 +118,10 @@ function(input, output) {
   # produce summary
   output$summary <- renderPrint({
     summary(r())
+  })
+  
+  output$washers <- renderPlot({
+    r3()
   })
   
 }

@@ -1,4 +1,11 @@
+library(shiny)
+library(ggplot2)
 
+ui <- navbarPage(
+                 
+"Laundry Analysis",
+
+tabPanel("Machines Available",
 # use fluid Bootstrap layout
 fluidPage(    
   
@@ -28,4 +35,29 @@ fluidPage(
       ) # end tabsetPanel
   ) # end mainPanel
   
-) # end fluidPage
+)
+),
+tabPanel("Probability of Machines Available",
+         fluidPage(
+           titlePanel(
+             h1("Laundry: Probability of Machines Available"),
+             windowTitle = "LaundryView Data"
+           ),
+           sidebarLayout(
+             
+             sidebarPanel(
+               selectInput("day1", "Day of Week:", c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
+               selectInput("location1", "Location:", vars),
+               selectInput("numMachines", "Number of Open Machines Desired", c(1,2,3,4,5)),
+               hr(),
+               helpText("LaundryView Data, March-April 2018")
+             ),
+             mainPanel(
+               tabsetPanel(type = "tabs",
+                           tabPanel("Washing Machines", plotOutput("washers")),
+                           tabPanel("Drying Machines", plotlyOutput("dryers")))
+             )
+           )
+         )
+  
+))# end fluidPage

@@ -5,6 +5,7 @@ library(plotly)
 
 # load in data
 load(file = "full.Rdata")
+load(file = "full_data.Rdata")
 
 # location dropdown in UI
 vars <- c("10 DEWOLFE STREET",
