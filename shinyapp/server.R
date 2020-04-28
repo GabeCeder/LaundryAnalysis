@@ -148,7 +148,7 @@ function(input, output) {
   r5 <- reactive({
     
     # switch day of week to numeric value originally assigned in data
-    d <- switch(input$day,
+    d <- switch(input$day2,
                 "Sunday" = 0,
                 "Monday" = 1,
                 "Tuesday" = 2,
@@ -158,7 +158,7 @@ function(input, output) {
                 "Saturday" = 6)
     
     # subset full1.Rdata on day of week and location selected
-    dist <- subset(full1, day == d & location == input$location)
+    dist <- subset(full1, day == d & location == input$location2)
     
     # return third column (avg_avail)
     dist[,3]
@@ -168,7 +168,7 @@ function(input, output) {
   # reactive function to determine min value for y-axis scale (washers)
   r6 <- reactive({
     
-    d <- switch(input$day,
+    d <- switch(input$day2,
                 "Sunday" = 0,
                 "Monday" = 1,
                 "Tuesday" = 2,
@@ -177,7 +177,7 @@ function(input, output) {
                 "Friday" = 5,
                 "Saturday" = 6)
     
-    dist <- subset(full1, day == d & location == input$location)
+    dist <- subset(full1, day == d & location == input$location2)
     
     # return min avg_avail times 0.8
     min(dist[,3]) * 0.8
@@ -187,7 +187,7 @@ function(input, output) {
   # reactive function to determine max value for y-axis scale (washers)
   r7 <- reactive({
     
-    d <- switch(input$day,
+    d <- switch(input$day2,
                 "Sunday" = 0,
                 "Monday" = 1,
                 "Tuesday" = 2,
@@ -196,7 +196,7 @@ function(input, output) {
                 "Friday" = 5,
                 "Saturday" = 6)
     
-    dist <- subset(full1, day == d & location == input$location)
+    dist <- subset(full1, day == d & location == input$location2)
     
     # return max avg_avail times 1.2
     max(dist[,3]) * 1.2
@@ -231,7 +231,7 @@ function(input, output) {
   # produce plot (dryers)
   output$plot1 <- renderPlotly({
     
-    d <- switch(input$day,
+    d <- switch(input$day2,
                 "Sunday" = 0,
                 "Monday" = 1,
                 "Tuesday" = 2,
@@ -240,7 +240,7 @@ function(input, output) {
                 "Friday" = 5,
                 "Saturday" = 6)
     
-    dist <- subset(full1, day == d & location == input$location)
+    dist <- subset(full1, day == d & location == input$location2)
     
     # characteristics for plot, center bars, label axes, set y-axis limits
     p <- ggplot(dist, aes(x = time, y = avg_avail, fill = avg_avail)) +

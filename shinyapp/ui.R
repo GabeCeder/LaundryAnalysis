@@ -50,8 +50,8 @@ navbarPage("Laundry Analysis",
              sidebarLayout(      
                
                sidebarPanel(
-                 selectInput("day", "Day of Week:", c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
-                 selectInput("location", "Location:", vars),
+                 selectInput("day2", "Day of Week:", c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")),
+                 selectInput("location2", "Location:", vars),
                  hr(),
                  helpText("LaundryView Data, March-April 2018")
                ),
