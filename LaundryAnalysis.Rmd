@@ -23,7 +23,7 @@ a <- read_excel("Copy of LaundryView Data.xlsx",
           clean_names()
 
 b <- read_excel("Copy of LaundryView Data.xlsx", 
-        sheet = "1201 MASS AVE3RD FLR LR") %>% 
+        sheet = "1201 MASS AVE 3RD FLR LR") %>% 
           mutate(location = "1201 MASS AVE 3RD FLR LR") %>% 
           clean_names()
 
@@ -301,6 +301,8 @@ full_data <- bind_rows(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, 
 
 save(full_data, file ="data/full_data.Rdata")
 
+full_data
+
 full_data %>% 
         mutate(no_washers = ifelse(avail_wash == 0, 1, 0)) %>% 
         group_by(location, time) %>%
@@ -314,8 +316,10 @@ full_data %>%
 
 ```{r, echo = FALSE}
 test <- full_data %>% 
-        group_by(time_of_day) %>% 
-        mutate(avg_unav = mean(unavailable_washers))
+        group_by(time) %>% 
+        mutate(avg_unav = mean(unavail_wash))
+
+a <- full_data
 ```
 
 
@@ -389,7 +393,24 @@ full_data %>%
         
 
 ```
+
 ```{r}
+
+houses <- read_excel("houses.xlsx") %>% 
+        clean_names()
+
+houses %>% ggplot(aes(house, people_to_washer_ratio_5, fill = people_to_washer_ratio_5)) +
+        geom_col() +
+        theme_classic() +
+  labs(x = "House", 
+       y = "Students Per Washing Machine", 
+        title = "Student to Washer Ratio in Each House" 
+    #    subtitle = "N = 525"
+    ) +
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 30, vjust= .7))
+
+ggsave("fixed_plot.jpg", plot = last_plot(), width = 8, height = 5)
 
 ```
 
